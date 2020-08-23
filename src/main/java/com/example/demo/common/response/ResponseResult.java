@@ -1,5 +1,6 @@
-package com.example.demo.common;
+package com.example.demo.common.response;
 
+import com.example.demo.common.ResultCode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;

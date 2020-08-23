@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserPreferenceDao extends JpaRepository<UserPreference, String> {
+
+    UserPreference findByUserId(String userId);
 }

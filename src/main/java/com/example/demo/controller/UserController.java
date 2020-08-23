@@ -2,10 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.RPCDomain.req.LoginRequest;
 import com.example.demo.RPCDomain.req.RegisterRequest;
-import com.example.demo.common.ResponseResult;
+import com.example.demo.common.response.ResponseResult;
 import com.example.demo.common.ResultCode;
 import com.example.demo.common.utils.JwtTokenUtil;
 import com.example.demo.model.User;
+import com.example.demo.model.UserPreference;
 import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,5 +69,4 @@ public class UserController {
 
         return new ResponseResult(ResultCode.SUCCESS, map);
     }
-
 }

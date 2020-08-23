@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.RPCDomain.req.LoginRequest;
 import com.example.demo.RPCDomain.req.RegisterRequest;
-import com.example.demo.common.ResponseResult;
+import com.example.demo.common.response.ResponseResult;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Service;
 
