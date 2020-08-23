@@ -1,11 +1,10 @@
-package com.example.demo.common.response;
+package com.example.demo.RPCDomain.req;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 
-public class UserPreferenceResponse implements Serializable {
+public class UserPreferenceRequest implements Serializable {
 
-    private static final long serialVersionUID = -8051681929272643635L;
+    private static final long serialVersionUID = -1729704158479961943L;
 
     private String todoNotice;
 

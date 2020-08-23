@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.common.response.ResponseResult;
-import com.example.demo.model.User;
+import com.example.demo.RPCDomain.response.ResponseResult;
 import com.example.demo.model.UserPreference;
 import org.springframework.stereotype.Service;
 

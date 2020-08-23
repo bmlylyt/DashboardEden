@@ -1,4 +1,4 @@
-package com.example.demo.common.response;
+package com.example.demo.RPCDomain.response;
 
 import com.example.demo.common.ResultCode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

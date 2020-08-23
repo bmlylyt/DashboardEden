@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.RPCDomain.req.LoginRequest;
 import com.example.demo.RPCDomain.req.RegisterRequest;
-import com.example.demo.common.response.ResponseResult;
+import com.example.demo.RPCDomain.response.ResponseResult;
 import com.example.demo.common.ResultCode;
 import com.example.demo.common.strategy.ContextMapper;
 import com.example.demo.common.strategy.OperatorStrategyEnum;

@@ -1,8 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.common.response.ResponseResult;
+import com.example.demo.RPCDomain.response.ResponseResult;
 import com.example.demo.common.ResultCode;
-import com.example.demo.common.response.UserPreferenceResponse;
+import com.example.demo.RPCDomain.response.UserPreferenceResponse;
 import com.example.demo.dao.UserPreferenceDao;
 import com.example.demo.model.User;
 import com.example.demo.model.UserPreference;
