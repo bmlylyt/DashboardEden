@@ -39,4 +39,7 @@ public interface ArticleTagDao extends JpaRepository<ArticleTag, String> {
      * @return
      */
     List<ArticleTag> findByArticleId(String articleId);
+
+    @Query("select tagName from ArticleTag where articleId = ?1")
+    List<String> findTagNamesByArticalId(String id);
 }

@@ -11,4 +11,10 @@ import org.springframework.stereotype.Service;
 public interface ArticleService extends BaseService<Article, String> {
 
     ResponseResult publish(String userId, ArticleRequest articleRequest);
+
+    ResponseResult updateArticleByAuthor(String userId, ArticleRequest articleRequest);
+
+    ResponseResult deleteArticleById(String id);
+
+    ResponseResult showSingleArticle(String id);
 }
