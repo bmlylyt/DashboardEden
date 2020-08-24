@@ -101,7 +101,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
         }
         Optional<Article> articleOptional = articleDao.findById(id);
         if (articleOptional.isPresent()) {
-            List<String> articalTags = articleTagDao.findTagNamesByArticalId(id);
+            List<String> articalTags = articleTagDao.findTagNamesByArticleId(id);
             ArticleResponse articleResponse = new ArticleResponse();
             BeanUtils.copyProperties(articleOptional.get(), articleResponse);
             articleResponse.setArticleTagList(articalTags);

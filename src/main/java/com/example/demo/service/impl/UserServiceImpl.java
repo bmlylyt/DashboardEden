@@ -10,6 +10,7 @@ import com.example.demo.common.ResultCode;
 import com.example.demo.common.strategy.ContextMapper;
 import com.example.demo.common.strategy.OperatorStrategyEnum;
 import com.example.demo.component.validator.ReqValidateManager;
+import com.example.demo.dao.ArticleTagDao;
 import com.example.demo.dao.UserDao;
 import com.example.demo.model.*;
 import com.example.demo.service.*;
@@ -53,6 +54,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String>
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private ArticleTagDao articleTagDao;
 
     @Autowired
     private UserDao userDao;
@@ -130,6 +134,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, String>
         for (Article article : articleList) {
             ArticleResponse articleResponse = new ArticleResponse();
             BeanUtils.copyProperties(article, articleResponse);
+
+            List<String> articleTags = articleTagDao.findTagNamesByArticleId(article.getId());
+            if (articleTags != null && articleTags.size() != 0) {
+                articleResponse.setArticleTagList(articleTags);
+            }
             articleResponseList.add(articleResponse);
         }
         userCenterVOResponse.setArticleList(articleResponseList);
