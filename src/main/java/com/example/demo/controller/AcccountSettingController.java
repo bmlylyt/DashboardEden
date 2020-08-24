@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@CrossOrigin
 @RequestMapping("/account/settings")
 public class AcccountSettingController {
 
