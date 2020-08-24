@@ -20,4 +20,6 @@ public interface UserService extends BaseService<User, String> {
     boolean checkVerified(User user);
 
     boolean checkPassword(User user, LoginRequest loginRequest);
+
+    ResponseResult getAcountCenterInfo(String userIdByAuthorHead);
 }

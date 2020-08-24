@@ -7,6 +7,8 @@ import com.example.demo.model.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ArticleService extends BaseService<Article, String> {
 
@@ -17,4 +19,6 @@ public interface ArticleService extends BaseService<Article, String> {
     ResponseResult deleteArticleById(String id);
 
     ResponseResult showSingleArticle(String id);
+
+    List<Article> getRecentArticles();
 }

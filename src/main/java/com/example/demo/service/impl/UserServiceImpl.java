@@ -1,8 +1,11 @@
 package com.example.demo.service.impl;
 
+import ch.qos.logback.core.rolling.helper.ArchiveRemover;
 import com.example.demo.RPCDomain.req.LoginRequest;
 import com.example.demo.RPCDomain.req.RegisterRequest;
+import com.example.demo.RPCDomain.response.ArticleResponse;
 import com.example.demo.RPCDomain.response.ResponseResult;
+import com.example.demo.RPCDomain.response.UserCenterVOResponse;
 import com.example.demo.common.ResultCode;
 import com.example.demo.common.strategy.ContextMapper;
 import com.example.demo.common.strategy.OperatorStrategyEnum;
@@ -11,9 +14,14 @@ import com.example.demo.dao.UserDao;
 import com.example.demo.model.*;
 import com.example.demo.service.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, String>
@@ -40,8 +48,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, String>
     @Autowired
     private UserPreferenceService userPreferenceService;
 
-//    @Autowired
-//    private UserTagService userTagService;
+    @Autowired
+    private UserTagService userTagService;
+
+    @Autowired
+    private ArticleService articleService;
 
     @Autowired
     private UserDao userDao;
@@ -96,6 +107,33 @@ public class UserServiceImpl extends BaseServiceImpl<User, String>
     @Override
     public boolean checkPassword(User user, LoginRequest loginRequest) {
         return StringUtils.equals(user.getPasssword(), loginRequest.getPassword());
+    }
+
+    @Override
+    public ResponseResult getAcountCenterInfo(String userId) {
+        Optional<User> optionalUser = userDao.findById(userId);
+        if (!optionalUser.isPresent()) {
+            return new ResponseResult(ResultCode.USER_NOT_EXIST);
+        }
+        User user = optionalUser.get();
+        UserCenterVOResponse userCenterVOResponse = new UserCenterVOResponse();
+        userCenterVOResponse.setUsername(user.getUsername());
+        Address address = addressService.findById(user.getId()).get();
+        String provinceAndCity = (address.getProvince() == null ? "" : address.getProvince())
+                + (address.getCity() == null ?  "" : address.getCity());
+        userCenterVOResponse.setProvinceAndCity(provinceAndCity);
+        userCenterVOResponse.setPersonalProfile(userProfileService.findById(userId).get().getPersonalProfile());
+        userCenterVOResponse.setUserTagList(userTagService.getUserTagList(user.getId()));
+
+        List<Article> articleList = articleService.getRecentArticles();
+        List<ArticleResponse> articleResponseList = new ArrayList<>();
+        for (Article article : articleList) {
+            ArticleResponse articleResponse = new ArticleResponse();
+            BeanUtils.copyProperties(article, articleResponse);
+            articleResponseList.add(articleResponse);
+        }
+        userCenterVOResponse.setArticleList(articleResponseList);
+        return new ResponseResult(ResultCode.SUCCESS, userCenterVOResponse);
     }
 
     private void initUserInfo(final User user) {

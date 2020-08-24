@@ -13,10 +13,14 @@ import com.example.demo.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,5 +108,13 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
             return new ResponseResult(ResultCode.SUCCESS, articleResponse);
         }
         return new ResponseResult(ResultCode.RESULT_DATA_NONE);
+    }
+
+    @Override
+    public List<Article> getRecentArticles() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "publishTime"));
+        ArrayList<Article> articles = new ArrayList<>();
+        articleDao.findAll(pageable).forEach(articles::add);
+        return articles;
     }
 }

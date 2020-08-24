@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserTageServiceImpl extends BaseServiceImpl<UserTag, String>
         implements UserTagService {
@@ -17,5 +19,10 @@ public class UserTageServiceImpl extends BaseServiceImpl<UserTag, String>
     @Override
     protected JpaRepository getJpaRepository() {
         return userTagDao;
+    }
+
+    @Override
+    public List<String> getUserTagList(String userId) {
+        return userTagDao.getUserTagList(userId);
     }
 }
